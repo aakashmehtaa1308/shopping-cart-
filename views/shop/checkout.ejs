@@ -1,0 +1,30 @@
+<%- include ('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/cart.css">
+</head>
+
+<body>
+    <%-include('../includes/navigation.ejs') %>
+    <main class="centered">
+        <ul class="cart__item-list my-12">
+            <%products.forEach(p => {%>
+                <li class="cart__item flex justify-around my-4">
+                    <h1 style="font-size: 1.5rem; font-weight: 700;"><%= p.productId.title %></h1>
+                    <h2 style="font-size: 1.5rem; font-weight: 700;">Quantity: <%= p.quantity %></h2>
+                    <h1 style="font-size: 1.5rem; font-weight: 700;">Price: ₹ <%= p.productId.price %></h1>
+
+                </li>
+            <% }) %>
+        </ul>
+        <div style="width:87%;text-align: right;">
+            <h2 style="color: rgb(255, 136, 0);font-size: 1.5rem; font-weight: 700;">Total : ₹ <%= totalSum %></h2>
+        </div>
+    </main>
+    <hr>
+    <div class="centered my-12 ">
+        <form action="/create-order" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn">Order Now!</button>
+        </form>
+    </div>
+    <%- include('../includes/end.ejs') %>
+</body>

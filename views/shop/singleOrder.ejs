@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+
+
+<section class="status">
+    <div class="container mx-auto">
+        <div class="status-box w-full lg:w-2/3 mx-auto">
+        <div class="flex items-center justify-between mb-12">
+            <h1 class="text-xl font-bold">Track Delivery Status</h1>
+            <h6 class="bg-white py-1 rounded-full px-4 text-green-600 text-xs"><%= order._id %></h6>
+
+            <input id="hiddenInput" type="hidden" value="<%= JSON.stringify(order) %>">
+        </div>
+        <ul>
+            <li class="status_line text-sm md:text-xl pb-16" data-status="placed"><span>Order Placed</span></li>
+            <li class="status_line text-sm md:text-xl pb-16" data-status="confirmed"><span>Order confirmed</span></li>
+            <li class="status_line text-sm md:text-xl pb-16" data-status="prepared"><span>Dispatched</span></li>
+            <li class="status_line text-sm md:text-xl pb-16" data-status="delivered"><span>Out for Delivery</span></li>
+            <li class="status_line text-sm md:text-xl pb-16" data-status="completed"><span>Complete</span></li>
+            <% if (order.status==='completed') { %>
+                <li class=" text-sm md:text-xl"><span>Your order has been completed successfully.</span></li>
+            <% } %>
+        </ul>
+        </div>
+    </div>
+</section>
+
+
+<%- include('../includes/end.ejs') %>

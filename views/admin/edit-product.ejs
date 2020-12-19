@@ -1,0 +1,77 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main class="login flex justify-center pt-24">
+            
+              <% if (errorMessage) { %>
+              <div class="user-message user-message--error"><%= errorMessage %></div>
+              <% } %>
+              <form
+                action="/admin/<% if(editing){%>editProduct<%} else {%>addProduct<%} %>"
+                method="POST"
+                class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                enctype="multipart/form-data"
+              >
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                    Name
+                  </label>
+                  <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="title"
+                    type="text"
+                    placeholder="Enter product name"
+                    name="title"
+                    value="<% if(editing) {%><%=product.title%><%} %>"
+                  />
+                </div>
+          
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+                    Price
+                  </label>
+                  <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="name"
+                    type="number"
+                    placeholder="Enter product Price"
+                    name="price"
+                    step="0.01"
+                    value="<% if(editing) {%><%= product.price%><%} %>"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
+                    Image
+                  </label>
+                  <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="image"
+                    type="file"
+                    name="image"
+                  />
+                </div>
+          
+                <% if (editing) { %>
+                <input type="hidden" value="<%= product._id %>" name="productId" />
+                <% } %>
+          
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <div class="flex items-center justify-between">
+                  <button
+                    class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit"
+                    style="background-color: orange;"
+                  >
+                    <% if(editing) {%>Update Product<%} else {%>Add Product<%} %>
+                  </button>
+                </div>
+              </form>
+          
+    </main>
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,80 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+
+            <div class="container mx-auto pt-12">
+                <h1 class="font-bold text-lg mb-4">All orders</h1>
+                
+                <table class="w-full table-auto bg-white" >
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 text-left">OrderId</th>
+                            <th class="px-4 py-2 text-left">Invoice</th>
+                            <th class="px-4 py-2 text-left">Action</th>
+                            <th class="px-4 py-2 text-left">Products</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(orders.length) { %>
+                            <% orders.forEach((order) => { %>
+                                <tr>
+                                    <td class="border px-4 py-2">
+                                        <a class="link"><%= order._id %></a>
+                                    </td>
+                                    <td class="border px-4 py-2">
+                                        <a style="color: blue;" href="/orders/<%= order._id %>">Invoice</a>
+                                    </td>
+                                    <td class="border px-4 py-2">
+                                        <a style="color: blue;" href="/singleOrder/<%= order._id %>">Track</a>
+                                    </td>
+                                    <td class="border px-4 py-2">
+                                        <% order.products.forEach(p => {%> 
+                                            <li class = "orders__products-item" style="font-size: 1rem; font-weight: 400;"><%= p.product.title %> (<%= p.quantity %>)</li>
+                                            <%}); %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td class="p-4">No Order Found</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+
+            
+            <!-- <% if(orders.length <=0) { %>
+                <h1>Nothing there!</h1>
+                <% } else { %> 
+                    <ul>
+                        <% orders.forEach(order => {%>
+                            <li id="order__table" class="cart__item flex justify-around content-center my-4">
+                                <h1 style="font-size: 1rem; font-weight: 700;"># <%= order._id %> - <a style="color: blue;" href="/orders/<%= order._id %>">Invoice</a> - <a style="color: blue;" href="/singleOrder/<%= order._id %>">Track</a></h1>
+                                <ul class = "orders__products">
+                                    we cannot use orderItem in place of products because seq. does not provide this hence provide additional data in shop controller with getOrders -->
+                                    <!--<% order.products.forEach(p => {%> 
+                                        <li class = "orders__products-item" style="font-size: 1rem; font-weight: 400;"><%= p.product.title %> (<%= p.quantity %>)</li>
+                                         <%}); %>
+                                        
+                                </ul>
+                                
+                            </li>
+                            <hr />
+                             <%}); %>
+
+                             <hr />
+
+                    </ul>
+                     <%} %> -->
+            
+        </main>
+        <%- include('../includes/end.ejs') %>

@@ -1,0 +1,29 @@
+<%- include('../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main style="padding-top: 6rem;">
+            <div class="centered flex flex-col justify-around items-center my-8">
+                <div class="card__image">
+                    <img src="/<%= product.imageUrl %>" alt="<%= product.title %>">
+                </div>
+                <div class="my-12">
+                    <h1 style="text-transform: uppercase;font-size: 2rem;font-weight: 600;"><%= product.title %></h1>
+                    <h2 style="font-size: 1.5rem; font-weight: 400;">Your Price: $<%= product.price %></h2>
+
+                    <h3 style="font-size: 200;">Delivery Charges: $0</h3>
+
+                    <h2 style="font-size: 1.5rem; font-weight: 400;">Total Price: $<%= product.price %></h2>
+                </div>
+                <% if (isAuthenticated) { %>
+                    <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                <% } %>
+            </div>
+            
+            
+            
+            
+            
+        </main>
+        <%- include('../includes/end.ejs') %>

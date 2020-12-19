@@ -1,0 +1,50 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <div class="container px-5 py-24 mx-auto">
+            <div class="both flex flex-wrap -m-12">
+              <div class="upper p-12 md:w-1/2 flex flex-col items-start justify-center">
+                <h2 class="sm:text-3xl text-2xl title-font font-medium text-gray-900 mt-4 mb-4"><em>Want to Shop?</em></h2>
+                <p class="leading-relaxed mb-8 text-3xl md:text-6xl">Don't wait!</p>
+                <a href="/products" class="orderButton">Order Now</a>
+              </div>
+              <div class="index-image lg:p-12  flex flex-col items-start">
+                
+            </div>
+          </div>
+        <% if (prods.length > 0) { %>
+            <h1 class="heading text-center pt-16" style="border-bottom: 1px solid rgb(255, 123, 0);"><em>Featured Products</em></h1>
+            <div class="grid">
+                <% for (let product of prods) { %>
+                    <article class="card product-item">
+                        
+                        <div class="card__image">
+                            <img src="/<%= product.imageUrl %>"
+                                alt="<%= product.title %>">
+                        </div>
+                        <header class="card__header">
+                            <h1 class="product__title" style="font-size: 1.5rem; font-weight: 700;"><%= product.title %></h1>
+                        </header>
+                        <div class="card__content">
+                            <h2 class="product__price" style="font-size: 1.5rem; font-weight: 700;">₹<%= product.price %></h2>
+                        </div>
+                        <div class="card__actions">
+                            <% if (isAuthenticated) { %>
+                                <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                                <% } %>
+                        </div>
+                    </article>
+                <% } %>
+            </div>
+            <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage,previousPage: previousPage,lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage }) %>
+
+        <% } else { %>
+            <h1 style="padding-top: 6rem;">No Products Found!</h1>
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>
